@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 
-import Homepage from "./pages/Homepage";
+import Homepage from "./pages/Homepage/Homepage";
 
 const App = () => {
   return (
