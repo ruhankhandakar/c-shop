@@ -1,11 +1,13 @@
 import React, { Fragment } from "react";
-
+import { Switch, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage/Homepage";
 
 const App = () => {
   return (
     <Fragment>
-      <Homepage />
+      <Switch>
+        <Route exact path="/" component={Homepage} />
+      </Switch>
     </Fragment>
   );
 };
