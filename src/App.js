@@ -1,5 +1,6 @@
 import React, { Fragment, Component } from "react";
 import { Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
 
 import Homepage from "./pages/Homepage/Homepage";
 import ShopPage from "./pages/ShopPage/ShopPage";
@@ -7,12 +8,9 @@ import Header from "./components/Header/Header";
 import Auth from "./pages/Auth/Auth";
 
 import { auth, createUserProfileDocument } from "./firebase/util";
+import { setCurrentUser } from "./redux/actions/userAction";
 
 class App extends Component {
-  state = {
-    currentUser: null
-  };
-
   unsubscribeFromAuth = null;
 
   componentDidMount() {
@@ -21,18 +19,13 @@ class App extends Component {
         // if user sign in
         const userRef = await createUserProfileDocument(user);
         userRef.onSnapshot(snapShot => {
-          this.setState({
-            currentUser: {
-              id: snapShot.id,
-              ...snapShot.data()
-            }
+          this.props.setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data()
           });
         });
       } else {
-        // if user sign out
-        this.setState({
-          currentUser: null
-        });
+        this.props.setCurrentUser(null);
       }
     });
   }
@@ -41,10 +34,9 @@ class App extends Component {
     this.unsubscribeFromAuth();
   }
   render() {
-    const { currentUser } = this.state;
     return (
       <Fragment>
-        <Header currentUser={currentUser} />
+        <Header />
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route path="/shop" component={ShopPage} />
@@ -55,4 +47,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(null, { setCurrentUser })(App);
