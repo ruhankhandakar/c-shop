@@ -27,6 +27,7 @@ class App extends Component {
               ...snapShot.data()
             }
           });
+          console.log(this.state);
         });
       } else {
         // if user sign out
@@ -41,7 +42,6 @@ class App extends Component {
     this.unsubscribeFromAuth();
   }
   render() {
-    console.log(this.state);
     const { currentUser } = this.state;
     return (
       <Fragment>
