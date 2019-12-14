@@ -1,4 +1,5 @@
 import { createStore } from "redux";
+import { persistStore } from "redux-persist";
 
 import reducers from "./reducers";
 
@@ -11,5 +12,6 @@ if (process.env.NODE_ENV === "development") {
 } else {
   store = createStore(reducers);
 }
+const persistor = persistStore(store);
 
-export default store;
+export { store, persistor };
