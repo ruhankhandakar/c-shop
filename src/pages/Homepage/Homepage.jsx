@@ -2,13 +2,13 @@ import React from "react";
 
 import Directory from "../../components/Directory/Directory";
 
-import "./Homepage.scss";
+import { HomepageStyle } from "./Homepage.styled";
 
 const Homepage = () => {
   return (
-    <div className="homepage">
+    <HomepageStyle>
       <Directory />
-    </div>
+    </HomepageStyle>
   );
 };
 
